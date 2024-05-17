@@ -159,7 +159,7 @@
 
                         <div class="check mt-1"><input type="checkbox" /> Iscriviti alla Newsletter</div>
 
-                        <button type="submit" class="btn btn-outline-success mb-2" onclick="richiestaInfo()">Invia</button>
+                        <button type="submit" class="btn btn-outline-success mb-2" onclick="richiestaInfo(event)">Invia</button>
                         <br />
                     </form>
                 </div>
@@ -173,10 +173,18 @@
         </div>
     </footer>
     <script>
-        function richiestaInfo() {
-            
-                alert('Richiesta presa in carico! Risponderemo il prima possibile');
-           
+        function richiestaInfo(event) {
+            event.preventDefault();
+
+            var emailInsert = document.getElementById("email-insert").value;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(emailInsert) || emailInsert == "") {
+                alert("Devi inserire una mail valida!");
+            } else {
+                alert("Complimenti, hai inviato correttamente una richiesta a: " + emailInsert);
+                document.getElementById("email-insert").value = "";
+            }
         }
     </script>
 
